@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Event" representedClassName="Event" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BAsset" representedClassName="BAsset" syncable="YES" codeGenerationType="class">
+        <attribute name="assetIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="downloadFilename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isAnimated" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isMissing" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="originallFilename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnailAssetIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BPost" inverseName="files" inverseEntity="BPost" syncable="YES"/>
+    </entity>
+    <entity name="BBoard" representedClassName="BBoard" syncable="YES" codeGenerationType="class">
+        <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="site" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BSite" inverseName="boards" inverseEntity="BSite" syncable="YES"/>
+        <relationship name="threads" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BThread" inverseName="board" inverseEntity="BThread" syncable="YES"/>
+    </entity>
+    <entity name="BPerson" representedClassName="BPerson" syncable="YES" codeGenerationType="class">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastSeen" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="posts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BPost" inverseName="author" inverseEntity="BPost" syncable="YES"/>
+        <relationship name="site" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BSite" inverseName="authors" inverseEntity="BSite" syncable="YES"/>
+    </entity>
+    <entity name="BPost" representedClassName="BPost" syncable="YES" codeGenerationType="class">
+        <attribute name="idString" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BPerson" inverseName="posts" inverseEntity="BPerson" syncable="YES"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BAsset" inverseName="post" inverseEntity="BAsset" syncable="YES"/>
+        <relationship name="followups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BPost" inverseName="references" inverseEntity="BPost" syncable="YES"/>
+        <relationship name="references" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BPost" inverseName="followups" inverseEntity="BPost" syncable="YES"/>
+        <relationship name="thread" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BThread" inverseName="posts" inverseEntity="BThread" syncable="YES"/>
+    </entity>
+    <entity name="BSite" representedClassName="BSite" codeGenerationType="class">
+        <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="apiURLString" attributeType="String" syncable="YES"/>
+        <attribute name="boardsPartialPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastVisit" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BPerson" inverseName="site" inverseEntity="BPerson" syncable="YES"/>
+        <relationship name="boards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BBoard" inverseName="site" inverseEntity="BBoard" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <entity name="BThread" representedClassName="BThread" syncable="YES" codeGenerationType="class">
+        <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BBoard" inverseName="threads" inverseEntity="BBoard" syncable="YES"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BPost" inverseName="thread" inverseEntity="BPost" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="BAsset" positionX="567" positionY="72" width="128" height="180"/>
+        <element name="BBoard" positionX="-90" positionY="72" width="128" height="120"/>
+        <element name="BPerson" positionX="79" positionY="251" width="128" height="120"/>
+        <element name="BPost" positionX="351" positionY="72" width="128" height="165"/>
+        <element name="BSite" positionX="-288" positionY="72" width="128" height="165"/>
+        <element name="BThread" positionX="124" positionY="72" width="128" height="75"/>
     </elements>
 </model>

@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
 		// Update the user interface for the detail item.
 		if let detail = self.detailItem {
 		    if let label = self.detailDescriptionLabel {
-		        label.text = detail.timestamp!.description
+				label.text = "" // detail.timestamp!.description
 		    }
 		}
 	}
@@ -33,13 +33,11 @@ class DetailViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
-	var detailItem: Event? {
+	var detailItem: BPost? {
 		didSet {
 		    // Update the view.
 		    self.configureView()
 		}
 	}
-
-
 }
 
