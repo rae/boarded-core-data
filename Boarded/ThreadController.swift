@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  ThreadController.swift
 //  Boarded
 //
 //  Created by Reid Ellis on 2017-01-10.
@@ -8,18 +8,15 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class ThreadController: UIViewController {
 
 	@IBOutlet weak var detailDescriptionLabel: UILabel!
-
+	var thread : BThread? = nil
 
 	func configureView() {
 		// Update the user interface for the detail item.
-		if let detail = self.detailItem {
-		    if let label = self.detailDescriptionLabel {
-				label.text = "" // detail.timestamp!.description
-		    }
-		}
+		let count = self.thread?.posts?.count ?? 0
+		detailDescriptionLabel.text = "\(count)"
 	}
 
 	override func viewDidLoad() {

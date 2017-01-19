@@ -11,21 +11,58 @@ import CoreData
 
 class BoardController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-	var detailViewController: DetailViewController? = nil
-	var managedObjectContext: NSManagedObjectContext? = nil
-	var site : BSite? = nil
+	var threadController: ThreadController? = nil
+	var managedObjectContext: DBRef? = nil
+	var site: BSite? = nil
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		self.navigationItem.leftBarButtonItem = self.editButtonItem
 
-		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewButton(_:)))
 		self.navigationItem.rightBarButtonItem = addButton
 		if let split = self.splitViewController {
 		    let controllers = split.viewControllers
-		    self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+		    self.threadController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ThreadController
 		}
+		self.managedObjectContext?.performAndWait {
+			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BBoard")
+			fetchRequest.predicate = nil
+			fetchRequest.resultType = NSFetchRequestResultType.countResultType
+			do {
+				if let count = try self.managedObjectContext?.count(for: fetchRequest) {
+					
+				}
+			} catch {
+				//Assert or handle exception gracefully
+			}
+
+		}
+//		guard let _ = self.site.urlString else {
+			self.load4chan()
+//			return
+//		}
+	}
+
+	func load4chan() {
+//		let scheme = "https://"
+//		let ext = ".json" // could be xml or something in future?
+//		self.site = NSEntityDescription.insertNewObject(forEntityName: "BSite", into: self.managedObjectContext!) as! BSite
+//		self.site!.apiURLString = scheme + "a.4cdn.org"
+//		let boardsApiUrlString = self.site!.apiURLString! + "/boards" + ext
+//		let boardsURL = URL(string: boardsApiUrlString)!
+////		let req = URLRequest(url: boardsURL)
+//		let session = URLSession(configuration: URLSessionConfiguration.background(withIdentifier: "ca.tnir.boarded"))
+//
+//		let _ = session.dataTask(with: boardsURL) { (data, response, error) in
+//			guard error == nil, data != nil else {
+//				return
+//			}
+//			let str = String(data:data!, encoding: .utf8)
+//			NSLog("data is \(str)")
+//		}
+
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +75,8 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 		// Dispose of any resources that can be recreated.
 	}
 
-	func insertNewObject(_ sender: Any) {
+	func insertNewButton(_ sender: Any) {
 		let context = self.fetchedResultsController.managedObjectContext
-		let newThread = BThread(context: context)
 
 		// Save the context.
 		do {
@@ -59,7 +95,7 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 		if segue.identifier == "showDetail" {
 		    if let indexPath = self.tableView.indexPathForSelectedRow {
 		    let object = self.fetchedResultsController.object(at: indexPath)
-		        let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+		        let controller = (segue.destination as! UINavigationController).topViewController as! ThreadController
 //		        controller.detailItem = object
 		        controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
 		        controller.navigationItem.leftItemsSupplementBackButton = true

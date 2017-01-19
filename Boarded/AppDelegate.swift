@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -17,14 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-		let splitViewController = self.window!.rootViewController as! UISplitViewController
-		let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-		navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-		splitViewController.delegate = self
-
-		let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-		let controller = masterNavigationController.topViewController as! BoardController
-		controller.managedObjectContext = self.persistentContainer.viewContext
+		MagicalRecord.setupCoreDataStack();
+		self.load4chan()
+//		let splitViewController = self.window!.rootViewController as! UISplitViewController
+//		let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+//		navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+//		splitViewController.delegate = self
+//
+//		let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+//		let controller = masterNavigationController.topViewController as! BoardController
+//		controller.managedObjectContext = self.persistentContainer.viewContext
 		return true
 	}
 
@@ -52,11 +55,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		self.saveContext()
 	}
 
+	// MARK: - 4Chan
+
+	func load4chan() {
+		let scheme = "https://"
+		let ext = ".json" // could be xml or something in future?
+		let apiURLString = scheme + "a.4cdn.org"
+		let boardsApiUrlString = apiURLString + "/boards" + ext
+		let boardsURL = URL(string: boardsApiUrlString)!
+		//		let req = URLRequest(url: boardsURL)
+		let session = URLSession.shared;
+		NSLog("Got session \(session)")
+		let task = URLSession.shared.dataTask(with: boardsURL) { (data, response, error) in
+			guard error == nil, let data=data else {
+				return
+			}
+			do {
+				print("Got session data \(data), response \(response), error \(error)")
+				let str = String(data:data, encoding: .utf8)
+				NSLog("data is \(str)")
+				let json = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
+				let dict = json as! [String:Any]
+				print(dict)
+			} catch let error {
+				print(error)
+			}
+		}
+		task.resume();
+	}
+
 	// MARK: - Split view
 
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
 	    guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-	    guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
+	    guard let topAsDetailController = secondaryAsNavController.topViewController as? ThreadController else { return false }
 	    if topAsDetailController.detailItem == nil {
 	        // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
 	        return true
