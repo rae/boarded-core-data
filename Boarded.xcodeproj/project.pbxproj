@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -75,6 +75,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0118D3ED1E3253B5004F3FFB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		01D4C7661E259C1F00F7985F = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +105,7 @@
 		01D4C7711E259C1F00F7985F /* Boarded */ = {
 			isa = PBXGroup;
 			children = (
+				0118D3ED1E3253B5004F3FFB /* Model */,
 				01D4C7721E259C1F00F7985F /* AppDelegate.swift */,
 				01D4C7771E259C1F00F7985F /* BoardController.swift */,
 				014A94541E283BFA00982838 /* Util.swift */,
@@ -205,7 +213,7 @@
 				};
 			};
 			buildConfigurationList = 01D4C76A1E259C1F00F7985F /* Build configuration list for PBXProject "Boarded" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (

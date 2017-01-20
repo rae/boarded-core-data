@@ -71,12 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 				return
 			}
 			do {
-				print("Got session data \(data), response \(response), error \(error)")
-				let str = String(data:data, encoding: .utf8)
-				NSLog("data is \(str)")
 				let json = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
 				let dict = json as! [String:Any]
-				print(dict)
+				BSite.add(dict:dict)
 			} catch let error {
 				print(error)
 			}
