@@ -19,6 +19,9 @@
 		01D4C7821E259C1F00F7985F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C7801E259C1F00F7985F /* LaunchScreen.storyboard */; };
 		01D4C78D1E259C1F00F7985F /* BoardedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4C78C1E259C1F00F7985F /* BoardedTests.swift */; };
 		01D4C7981E26EA7200F7985F /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4C7971E26EA7200F7985F /* BoardCell.swift */; };
+		01E7B15C1E36C24D00DC15EC /* BSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7B15B1E36C24D00DC15EC /* BSite.swift */; };
+		01E7B15E1E36C2DC00DC15EC /* BBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7B15D1E36C2DC00DC15EC /* BBoard.swift */; };
+		01E7B1601E36C2FA00DC15EC /* BThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7B15F1E36C2FA00DC15EC /* BThread.swift */; };
 		58F2BC4572197517F9062A64 /* Pods_Boarded.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD77DB7F42675F2A0CFCA701 /* Pods_Boarded.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +41,7 @@
 		014A94541E283BFA00982838 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		01D4C76F1E259C1F00F7985F /* Boarded.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boarded.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4C7721E259C1F00F7985F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		01D4C7751E259C1F00F7985F /* Boarded.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Boarded.xcdatamodel; sourceTree = "<group>"; };
+		01D4C7751E259C1F00F7985F /* Boarded.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = Boarded.xcdatamodel; sourceTree = "<group>"; };
 		01D4C7771E259C1F00F7985F /* BoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardController.swift; sourceTree = "<group>"; };
 		01D4C7791E259C1F00F7985F /* ThreadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadController.swift; sourceTree = "<group>"; };
 		01D4C77C1E259C1F00F7985F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -49,6 +52,9 @@
 		01D4C78C1E259C1F00F7985F /* BoardedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardedTests.swift; sourceTree = "<group>"; };
 		01D4C78E1E259C1F00F7985F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01D4C7971E26EA7200F7985F /* BoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
+		01E7B15B1E36C24D00DC15EC /* BSite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BSite.swift; path = Model/BSite.swift; sourceTree = "<group>"; };
+		01E7B15D1E36C2DC00DC15EC /* BBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBoard.swift; path = Model/BBoard.swift; sourceTree = "<group>"; };
+		01E7B15F1E36C2FA00DC15EC /* BThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BThread.swift; path = Model/BThread.swift; sourceTree = "<group>"; };
 		11BBCBEF0FBBAEC459933307 /* Pods-Boarded.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boarded.release.xcconfig"; path = "Pods/Target Support Files/Pods-Boarded/Pods-Boarded.release.xcconfig"; sourceTree = "<group>"; };
 		877DBF2B201F5444DA205A12 /* Pods-Boarded.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boarded.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Boarded/Pods-Boarded.debug.xcconfig"; sourceTree = "<group>"; };
 		DD77DB7F42675F2A0CFCA701 /* Pods_Boarded.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Boarded.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +84,9 @@
 		0118D3ED1E3253B5004F3FFB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01E7B15B1E36C24D00DC15EC /* BSite.swift */,
+				01E7B15D1E36C2DC00DC15EC /* BBoard.swift */,
+				01E7B15F1E36C2FA00DC15EC /* BThread.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -305,11 +314,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D4C7981E26EA7200F7985F /* BoardCell.swift in Sources */,
+				01E7B15E1E36C2DC00DC15EC /* BBoard.swift in Sources */,
 				014A94551E283BFA00982838 /* Util.swift in Sources */,
 				01D4C7731E259C1F00F7985F /* AppDelegate.swift in Sources */,
 				01D4C7761E259C1F00F7985F /* Boarded.xcdatamodeld in Sources */,
+				01E7B1601E36C2FA00DC15EC /* BThread.swift in Sources */,
 				01D4C7781E259C1F00F7985F /* BoardController.swift in Sources */,
 				01D4C77A1E259C1F00F7985F /* ThreadController.swift in Sources */,
+				01E7B15C1E36C24D00DC15EC /* BSite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 877DBF2B201F5444DA205A12 /* Pods-Boarded.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2627P9MACW;
 				INFOPLIST_FILE = Boarded/Info.plist;
@@ -462,6 +475,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 11BBCBEF0FBBAEC459933307 /* Pods-Boarded.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2627P9MACW;
 				INFOPLIST_FILE = Boarded/Info.plist;

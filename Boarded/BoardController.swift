@@ -31,9 +31,9 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 			fetchRequest.predicate = nil
 			fetchRequest.resultType = NSFetchRequestResultType.countResultType
 			do {
-				if let count = try self.managedObjectContext?.count(for: fetchRequest) {
+				// if let count = try self.managedObjectContext?.count(for: fetchRequest) {
 					
-				}
+				// }
 			} catch {
 				//Assert or handle exception gracefully
 			}

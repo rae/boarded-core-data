@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Xcode 7.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BAsset" representedClassName="BAsset" syncable="YES" codeGenerationType="class">
         <attribute name="assetIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="downloadFilename" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +13,12 @@
     </entity>
     <entity name="BBoard" representedClassName="BBoard" syncable="YES" codeGenerationType="class">
         <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boardIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cooldownImages" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cooldownReplies" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cooldownThreads" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imageLimit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="maxFileSize" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="site" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BSite" inverseName="boards" inverseEntity="BSite" syncable="YES"/>
@@ -54,7 +60,7 @@
     </entity>
     <elements>
         <element name="BAsset" positionX="567" positionY="72" width="128" height="180"/>
-        <element name="BBoard" positionX="-90" positionY="72" width="128" height="120"/>
+        <element name="BBoard" positionX="-90" positionY="72" width="128" height="210"/>
         <element name="BPerson" positionX="79" positionY="251" width="128" height="120"/>
         <element name="BPost" positionX="351" positionY="72" width="128" height="165"/>
         <element name="BSite" positionX="-288" positionY="72" width="128" height="165"/>

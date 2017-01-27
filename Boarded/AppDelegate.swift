@@ -73,7 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 			do {
 				let json = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
 				let dict = json as! [String:Any]
-				BSite.add(dict:dict)
+				let boards = dict["boards"] as! [[String:Any]]
+				BSite.add(boards:boards, name:"4Chan")
 			} catch let error {
 				print(error)
 			}
