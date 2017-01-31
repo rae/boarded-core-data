@@ -460,7 +460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 877DBF2B201F5444DA205A12 /* Pods-Boarded.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2627P9MACW;
 				INFOPLIST_FILE = Boarded/Info.plist;
@@ -475,7 +475,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 11BBCBEF0FBBAEC459933307 /* Pods-Boarded.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2627P9MACW;
 				INFOPLIST_FILE = Boarded/Info.plist;
