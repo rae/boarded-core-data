@@ -3,27 +3,15 @@ PODS:
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
-  - SwiftRecord (0.0.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - MagicalRecord
-  - SwiftRecord (from `https://github.com/rae/SwiftRecord.git`)
-
-EXTERNAL SOURCES:
-  SwiftRecord:
-    :git: https://github.com/rae/SwiftRecord.git
-
-CHECKOUT OPTIONS:
-  SwiftRecord:
-    :commit: a1e03b759ee43817fc8198d528d14f1a2cda7435
-    :git: https://github.com/rae/SwiftRecord.git
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
-  SwiftRecord: f171e483fc63f59f4fe465a5edf51b2e5630425c
 
-PODFILE CHECKSUM: 398f21d980b98f60b960637c0f26ce59d1f1fbc4
+PODFILE CHECKSUM: 8c887c50c7c9ee9dd222147ebc73573b250438c4
 
 COCOAPODS: 1.1.0.rc.2

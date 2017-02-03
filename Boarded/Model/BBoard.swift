@@ -32,10 +32,30 @@ extension BBoard {
 		self.imageLimit = inDict["image_limit"] as? Int32 ?? 0
 		self.maxFileSize = inDict["max+filesize"] as? Int32 ?? 0
 		self.populateThreads()
+		do {
+			try self.managedObjectContext?.save()
+		} catch let error as NSError  {
+			print("Could not save \(error), \(error.userInfo)")
+		}
+
 	}
 	func populateThreads() {
 		// download threads URL
 		// create entities
+
+		// http://a.4cdn.org/b/2.json
+
+		if let site=self.site, let path=self.path {
+			site.request(api: path, completion: { (jsonDict) in
+				print("dict: \(jsonDict)")
+			})
+		}
+
+	}
+	func add(threads:[[String:Any]]) {
+		for thread in threads {
+			print("Got thread \(thread)")
+		}
 	}
 
 }
