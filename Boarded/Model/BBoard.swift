@@ -10,6 +10,9 @@ import Foundation
 import MagicalRecord
 
 extension BBoard {
+
+	static var callbacks : [()->()] = []
+
 	class func add(dict inDict: [String:Any]) -> BBoard? {
 		let board = BBoard.mr_createEntity()
 		board?.add(dict:inDict)
@@ -49,6 +52,9 @@ extension BBoard {
 			site.request(api: path, completion: { (jsonDict) in
 				print("dict: \(jsonDict)")
 			})
+		}
+		for callback in BBoard.callbacks {
+			callback()
 		}
 
 	}

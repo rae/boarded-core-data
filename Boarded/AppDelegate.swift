@@ -17,17 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+		let splitViewController = self.window!.rootViewController as! UISplitViewController
+		let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+		navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+		splitViewController.delegate = self
+
+		let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+		let controller = masterNavigationController.topViewController as! BoardController
+		controller.managedObjectContext = self.persistentContainer.viewContext
+
 		// Override point for customization after application launch.
 		MagicalRecord.setupCoreDataStack();
-		self.load4chan()
-//		let splitViewController = self.window!.rootViewController as! UISplitViewController
-//		let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-//		navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-//		splitViewController.delegate = self
-//
-//		let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-//		let controller = masterNavigationController.topViewController as! BoardController
-//		controller.managedObjectContext = self.persistentContainer.viewContext
+		BSite.load4chan()
+
 		return true
 	}
 
@@ -53,33 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 		// Saves changes in the application's managed object context before the application terminates.
 		self.saveContext()
-	}
-
-	// MARK: - 4Chan
-
-	func load4chan() {
-		let scheme = "https://"
-		let ext = ".json" // could be xml or something in future?
-		let apiURLString = scheme + "a.4cdn.org"
-		let boardsApiUrlString = apiURLString + "/boards" + ext
-		let boardsURL = URL(string: boardsApiUrlString)!
-		//		let req = URLRequest(url: boardsURL)
-		let session = URLSession.shared;
-		NSLog("Got session \(session)")
-		let task = URLSession.shared.dataTask(with: boardsURL) { (data, response, error) in
-			guard error == nil, let data=data else {
-				return
-			}
-			do {
-				let json = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
-				let dict = json as! [String:Any]
-				let boards = dict["boards"] as! [[String:Any]]
-				BSite.add(boards:boards, name:"4Chan")
-			} catch let error {
-				print(error)
-			}
-		}
-		task.resume();
 	}
 
 	// MARK: - Split view
