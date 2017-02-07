@@ -17,7 +17,7 @@ extension BThread {
 
 	func add(dict inDict: [String:Any]) {
 		for(thread, threadDict) in inDict {
-			print(thread)
+//			print(thread)
 		}
 	}
 

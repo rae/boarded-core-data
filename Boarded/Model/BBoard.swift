@@ -50,17 +50,14 @@ extension BBoard {
 
 		if let site=self.site, let path=self.path {
 			site.request(api: path, completion: { (jsonDict) in
-				print("dict: \(jsonDict)")
+//				print("dict: \(jsonDict)")
 			})
-		}
-		for callback in BBoard.callbacks {
-			callback()
 		}
 
 	}
 	func add(threads:[[String:Any]]) {
 		for thread in threads {
-			print("Got thread \(thread)")
+//			print("Got thread \(thread)")
 		}
 	}
 

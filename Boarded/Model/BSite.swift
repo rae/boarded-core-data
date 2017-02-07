@@ -46,6 +46,9 @@ extension BSite {
 			let board = BBoard.add(dict: boardDict)
 			board?.site = self
 		}
+		for callback in BBoard.callbacks {
+			callback()
+		}
 	}
 
 	func request(api: String, completion: @escaping ([String:Any])-> Void) {

@@ -34,8 +34,13 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 	}
 
 	func reload() {
-		self.boards = BBoard.mr_findAll() as! [BBoard]
-		self.tableView.reloadData()
+		let boards = BBoard.mr_findAll() as! [BBoard]
+		self.boards = boards.sorted(by: { (board1, board2) -> Bool in
+			return board1.boardIdentifier! < board2.boardIdentifier!
+		})
+		DispatchQueue.main.async{
+			self.tableView.reloadData()
+		}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
