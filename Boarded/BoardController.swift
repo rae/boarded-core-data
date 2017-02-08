@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  BoardController.swift
 //  Boarded
 //
 //  Created by Reid Ellis on 2017-01-10.
@@ -9,11 +9,13 @@
 import UIKit
 import CoreData
 
-class BoardController: UITableViewController, NSFetchedResultsControllerDelegate {
+class BoardController: UITableViewController {
 
 	var threadController: ThreadController? = nil
 	var managedObjectContext: DBRef? = nil
 	var boards : [BBoard] = []
+	let stubs = ["fred", "ginger", "maryanne", "gilligan"]
+	enum Sections : Int { case stubs, boards, count }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,6 +37,7 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 
 	func reload() {
 		let boards = BBoard.mr_findAll() as! [BBoard]
+		// would be better to use mr_findAllSorted but no joy
 		self.boards = boards.sorted(by: { (board1, board2) -> Bool in
 			return board1.boardIdentifier! < board2.boardIdentifier!
 		})
@@ -51,17 +54,38 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 	// MARK: - Table View
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		return Sections.count.rawValue
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.boards.count
+		if let theSection = Sections(rawValue: section) {
+			switch theSection {
+			case .stubs:
+				return stubs.count
+			case .boards:
+				return self.boards.count
+			default:
+				return 0
+			}
+		}
+		return 0
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		let board = self.boards[indexPath.row]
-		self.configureCell(cell, withBoard: board)
+		let cell = tableView.dequeueReusableCell(withIdentifier: "BoardCell", for: indexPath) as! BoardCell
+		if let theSection = Sections(rawValue: indexPath.section) {
+			switch theSection {
+			case .stubs:
+			cell.textLabel?.text = "textLabel \(stubs[indexPath.row])"
+			cell.boardName?.text = "boardName \(stubs[indexPath.row])"
+			cell.boardDescription?.text = "boardDescription \(stubs[indexPath.row])"
+			case .boards:
+				let board = self.boards[indexPath.row]
+				self.configureCell(cell, withBoard: board)
+			default:
+				break
+			}
+		}
 		return cell
 	}
 
@@ -70,10 +94,12 @@ class BoardController: UITableViewController, NSFetchedResultsControllerDelegate
 		return false
 	}
 
-	func configureCell(_ cell: UITableViewCell, withBoard board: BBoard) {
+	func configureCell(_ cell: BoardCell, withBoard board: BBoard) {
 		if let desc=board.name, let title=board.boardIdentifier {
-			cell.textLabel!.text = title // thread.timestamp!.description
-			cell.detailTextLabel?.text = desc
+			NSLog("Setting \"\(title)\"")
+			cell.textLabel?.text = "hidden \(title)"
+			cell.boardName?.text = title // thread.timestamp!.description
+			cell.boardDescription?.text = desc
 		}
 	}
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThreadController: UIViewController {
+class ThreadController: UITableViewController {
 
 	@IBOutlet weak var detailDescriptionLabel: UILabel!
 	var thread : BThread? = nil

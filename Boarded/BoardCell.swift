@@ -10,4 +10,6 @@ import Foundation
 import UIKit
 
 class BoardCell : UITableViewCell {
+	@IBOutlet var boardName : UILabel?
+	@IBOutlet var boardDescription : UILabel?
 }
