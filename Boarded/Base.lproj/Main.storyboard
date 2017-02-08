@@ -81,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="52.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="EUo-Ez-k2a">
@@ -113,7 +113,7 @@
                                 <connections>
                                     <outlet property="boardDescription" destination="j7Y-ik-iIk" id="KhY-Zk-OsB"/>
                                     <outlet property="boardName" destination="slL-Sg-B77" id="hcF-IL-5Rl"/>
-                                    <segue destination="3ig-s1-rC9" kind="show" identifier="showDetail" id="6S0-TO-JiA"/>
+                                    <segue destination="3ig-s1-rC9" kind="show" identifier="showThreads" id="6S0-TO-JiA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

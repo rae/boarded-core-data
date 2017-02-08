@@ -108,8 +108,14 @@ class BoardController: UITableViewController {
 		}
 	}
 
-	// MARK: - Fetched results controller
-
-
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if(segue.identifier == "showThreads") {
+			guard let threads:ThreadController = sender as? ThreadController else {
+				return
+			}
+			threads.thread = nil
+//			threads.thread =
+		}
+	}
 }
 
