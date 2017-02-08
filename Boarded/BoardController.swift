@@ -15,7 +15,9 @@ class BoardController: UITableViewController {
 	var managedObjectContext: DBRef? = nil
 	var boards : [BBoard] = []
 	let stubs = ["fred", "ginger", "maryanne", "gilligan"]
-	enum Sections : Int { case stubs, boards, count }
+	enum Sections : Int { case boards, stubs, count }
+	let shouldUseStubs = false
+	let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -26,12 +28,17 @@ class BoardController: UITableViewController {
 		    let controllers = split.viewControllers
 		    self.threadController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ThreadController
 		}
-		self.reload()
-		let myCallback = {
-			self.reload
-		}
 
-		BBoard.callbacks.append(myCallback())
+		self.view.addSubview(self.activityView)
+		self.activityView.frame = self.view.bounds
+		self.activityView.startAnimating()
+		self.reload()
+
+		BBoard.callbacks.append({
+			self.activityView.stopAnimating()
+			self.activityView.removeFromSuperview()
+			self.reload()
+		})
 		print("callback count: \(BBoard.callbacks.count)")
 	}
 
@@ -54,16 +61,16 @@ class BoardController: UITableViewController {
 	// MARK: - Table View
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return Sections.count.rawValue
+		return self.shouldUseStubs ? Sections.count.rawValue : 1
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if let theSection = Sections(rawValue: section) {
 			switch theSection {
-			case .stubs:
-				return stubs.count
 			case .boards:
 				return self.boards.count
+			case .stubs:
+				return stubs.count
 			default:
 				return 0
 			}
@@ -75,13 +82,12 @@ class BoardController: UITableViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "BoardCell", for: indexPath) as! BoardCell
 		if let theSection = Sections(rawValue: indexPath.section) {
 			switch theSection {
-			case .stubs:
-			cell.textLabel?.text = "textLabel \(stubs[indexPath.row])"
-			cell.boardName?.text = "boardName \(stubs[indexPath.row])"
-			cell.boardDescription?.text = "boardDescription \(stubs[indexPath.row])"
 			case .boards:
 				let board = self.boards[indexPath.row]
 				self.configureCell(cell, withBoard: board)
+			case .stubs:
+				cell.boardName?.text = "boardName \(stubs[indexPath.row])"
+				cell.boardDescription?.text = "boardDescription \(stubs[indexPath.row])"
 			default:
 				break
 			}
@@ -97,7 +103,6 @@ class BoardController: UITableViewController {
 	func configureCell(_ cell: BoardCell, withBoard board: BBoard) {
 		if let desc=board.name, let title=board.boardIdentifier {
 			NSLog("Setting \"\(title)\"")
-			cell.textLabel?.text = "hidden \(title)"
 			cell.boardName?.text = title // thread.timestamp!.description
 			cell.boardDescription?.text = desc
 		}
