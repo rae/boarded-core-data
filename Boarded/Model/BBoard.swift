@@ -40,8 +40,8 @@ extension BBoard {
 		} catch let error as NSError  {
 			print("Could not save \(error), \(error.userInfo)")
 		}
-
 	}
+
 	func populateThreads() {
 		// download threads URL
 		// create entities

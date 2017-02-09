@@ -10,29 +10,19 @@ import Foundation
 import MagicalRecord
 
 extension BSite {
+
 	class func load4chan() {
-		let scheme = "https://"
-		let ext = ".json" // could be xml or something in future?
-		let apiURLString = scheme + "a.4cdn.org"
-		let boardsApiUrlString = apiURLString + "/boards" + ext
-		let boardsURL = URL(string: boardsApiUrlString)!
-		//		let req = URLRequest(url: boardsURL)
-		let session = URLSession.shared;
-		NSLog("Got session \(session)")
-		let task = URLSession.shared.dataTask(with: boardsURL) { (data, response, error) in
-			guard error == nil, let data=data else {
+		let server = APIRequest(urlString: "https://a.4cdn.org", apiString: "boards")
+		server.request { (dict) in
+			guard dict["boards"] != nil else {
 				return
 			}
-			do {
-				let json = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
-				let dict = json as! [String:Any]
-				let boards = dict["boards"] as! [[String:Any]]
-				BSite.add(boards:boards, name:"4Chan")
-			} catch let error {
-				print(error)
-			}
+			let boards = dict["boards"] as! [[String: Any]]
+			BSite.add(boards:boards, name:"4Chan")
+			MagicalRecord.save({ (context) in
+				//
+			})
 		}
-		task.resume();
 	}
 
 	class func add(boards: [[String:Any]], name: String) {
@@ -62,7 +52,7 @@ extension BSite {
 				let json = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
 				let dict = json as! [String:Any]
 				completion(dict)
-			} catch let error {
+			} catch {
 				completion([:])
 			}
 		}

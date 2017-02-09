@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01163DE21E4CAA7A001E4137 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01163DE11E4CAA7A001E4137 /* APIRequest.swift */; };
 		0124D9141E30FCB500BD371B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0124D9131E30FCB500BD371B /* libc++.tbd */; };
 		0124D9161E30FCCE00BD371B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0124D9151E30FCCE00BD371B /* libstdc++.tbd */; };
 		014A94551E283BFA00982838 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A94541E283BFA00982838 /* Util.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01163DE11E4CAA7A001E4137 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRequest.swift; path = Comm/APIRequest.swift; sourceTree = "<group>"; };
 		0124D9131E30FCB500BD371B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		0124D9151E30FCCE00BD371B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		014A94541E283BFA00982838 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -81,9 +83,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01163DE31E4CAB46001E4137 /* Comm */ = {
+			isa = PBXGroup;
+			children = (
+				01163DE11E4CAA7A001E4137 /* APIRequest.swift */,
+			);
+			name = Comm;
+			sourceTree = "<group>";
+		};
+		01163DE41E4CAB6B001E4137 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				01D4C7771E259C1F00F7985F /* BoardController.swift */,
+				01D4C7791E259C1F00F7985F /* ThreadController.swift */,
+				01D4C77B1E259C1F00F7985F /* Main.storyboard */,
+				01D4C7971E26EA7200F7985F /* BoardCell.swift */,
+				01D4C7801E259C1F00F7985F /* LaunchScreen.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		0118D3ED1E3253B5004F3FFB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01D4C7741E259C1F00F7985F /* Boarded.xcdatamodeld */,
 				01E7B15B1E36C24D00DC15EC /* BSite.swift */,
 				01E7B15D1E36C2DC00DC15EC /* BBoard.swift */,
 				01E7B15F1E36C2FA00DC15EC /* BThread.swift */,
@@ -116,15 +139,11 @@
 			children = (
 				0118D3ED1E3253B5004F3FFB /* Model */,
 				01D4C7721E259C1F00F7985F /* AppDelegate.swift */,
-				01D4C7771E259C1F00F7985F /* BoardController.swift */,
+				01163DE31E4CAB46001E4137 /* Comm */,
+				01163DE41E4CAB6B001E4137 /* UI */,
 				014A94541E283BFA00982838 /* Util.swift */,
-				01D4C7791E259C1F00F7985F /* ThreadController.swift */,
-				01D4C77B1E259C1F00F7985F /* Main.storyboard */,
-				01D4C7971E26EA7200F7985F /* BoardCell.swift */,
 				01D4C77E1E259C1F00F7985F /* Assets.xcassets */,
-				01D4C7801E259C1F00F7985F /* LaunchScreen.storyboard */,
 				01D4C7831E259C1F00F7985F /* Info.plist */,
-				01D4C7741E259C1F00F7985F /* Boarded.xcdatamodeld */,
 			);
 			path = Boarded;
 			sourceTree = "<group>";
@@ -321,6 +340,7 @@
 				01E7B1601E36C2FA00DC15EC /* BThread.swift in Sources */,
 				01D4C7781E259C1F00F7985F /* BoardController.swift in Sources */,
 				01D4C77A1E259C1F00F7985F /* ThreadController.swift in Sources */,
+				01163DE21E4CAA7A001E4137 /* APIRequest.swift in Sources */,
 				01E7B15C1E36C24D00DC15EC /* BSite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
